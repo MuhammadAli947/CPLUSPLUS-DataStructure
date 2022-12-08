@@ -1,0 +1,98 @@
+#include<iostream>
+using namespace std;
+class Stack
+{
+private:
+	int *stack;
+	int size;
+	int top;
+public:
+	Stack()
+	{
+		cout <<"Enter size of stack"<< endl;
+		cin >> size;
+		stack = new int[size];
+		top = 0;
+	}
+	bool IsFull()
+	{
+		if (top == size)
+			return true;
+		else
+			return false;
+	}
+	bool IsEmpty()
+	{
+		if (top == 0)
+			return true;
+		else
+			return false;
+	}
+	void PUSH(int val)
+	{
+		if (IsFull() == 0)
+		{
+			stack[top] = val;
+			top++;
+		}
+		else
+			cout << "Stack Overflow"<< endl;
+	}
+	void POP()
+	{
+		if (IsEmpty() == 0)
+		{
+			cout << stack[top - 1] << " is poped" << endl;
+			top--;
+		}
+		else
+			cout <<"Stack Underflow" << endl;
+		
+	}
+	void PrintStack()
+	{
+		if (IsEmpty() == 0)
+		{
+			for (int i = top-1; i>=0; i--)
+			{
+				cout << "__________" << endl;
+				cout << "|" << stack[i] << "|" << endl;
+				cout << "__________" << endl;
+			}
+		}
+		else
+		{
+			cout << "Stack Underflow"<< endl;
+		}
+		
+	}
+
+};
+void main()
+{
+	int value;
+	int choice;
+	Stack S1;
+	do{
+		cout << "Press 1 PUSH" << endl;
+		cout << "Press 2 POP" << endl;
+		cout << "Press 3 Print stack" << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << "Enter value" << endl;
+			cin >> value;
+			S1.PUSH(value);
+		}
+		else if (choice == 2)
+		{
+			S1.POP();
+		}
+		else if (choice == 3)
+		{
+			S1.PrintStack();
+		}
+		else
+			cout << "Invalid choice" << endl;
+	} while (1);
+}

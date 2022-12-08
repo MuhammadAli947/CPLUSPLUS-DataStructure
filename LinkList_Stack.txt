@@ -1,0 +1,107 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int val;
+	Node *previous;
+};
+class LLStack
+{
+private:
+	Node *Top;
+public:
+	LLStack()
+	{
+		Top = NULL;
+	}
+	bool is_Empty()
+	{
+		if (Top == NULL)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void Push(int value)
+	{
+		Node *newNode = new Node();
+		newNode->val = value;
+		newNode->previous = NULL;
+		if (Top == NULL)
+		{
+			Top = newNode;
+		}
+		else
+		{
+			newNode->previous = Top;
+			Top = newNode;
+		}
+	}
+	void Pop()
+	{
+		if (is_Empty() ==0)
+		{
+			Node *temp = Top;
+			cout << temp->val << " is Poped " << endl;
+			Top = temp->previous;
+			delete temp;
+		}
+		else
+		{
+			cout << "Stack UnderFlow " << endl;
+		}
+	}
+	void Print()
+	{
+		if (is_Empty() == 0)
+		{
+			Node *temp;
+			temp = Top;
+			while (temp != NULL)
+			{
+				cout << temp->val << endl;
+				temp = temp->previous;
+			}
+		}
+	}
+};
+void main()
+{
+	int choice;
+	int value;
+	LLStack obj;
+	do
+	{
+		cout << "Press 1 To Push Stack " << endl;
+		cout << "Press 2 To Pop Stack " << endl;
+		cout << "Press 3 To Print Stack " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << endl;
+			cout << "Enter Value " << endl;
+			cin >> value;
+			obj.Push(value);
+			cout << endl;
+		}
+		else if (choice == 2)
+		{
+			cout << endl;
+			obj.Pop();
+			cout << endl;
+		}
+		else if (choice == 3)
+		{
+			cout << endl;
+			obj.Print();
+			cout << endl;
+		}
+		else
+		{ 
+			cout << "Invalid Choice !" << endl;
+		}
+	} while (1);
+}

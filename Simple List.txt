@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+class MyList
+{
+private:
+	int *Arr;
+	int size;
+	int index;
+public:
+	MyList()
+	{
+		cout <<"enter the size of List" << endl;
+		cin >> size;
+		Arr = new int[size];
+		index = 0;
+	}
+	bool IsFull()
+	{
+		if (index == size)
+			return true;
+		else
+			return false;
+	}
+	bool IsEmty()
+	{
+		if (index == 0)
+			return true;
+		else
+			return false;
+	}
+	void input(int val)
+	{
+		if (IsFull() == false)
+		{
+			Arr[index] = val;
+			index++;
+		}
+		else
+			cout << "List is Full"<< endl;
+	}
+	void Output()
+	{
+		if (IsEmty() == false)
+		{
+			for (int i = 0; i < index; i++)
+			{
+				cout << Arr[i] << " : ";
+			}
+			cout << endl;
+		}
+		else
+			cout << "List is empty" << endl;
+	}
+};
+void main()
+{
+	int value;
+	int choice;
+	MyList M1;
+	do{
+		cout << "Press 1 to input in list" << endl;
+		cout << "Press 2 to output list" << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << "Enter value" << endl;
+			cin >> value;
+			M1.input(value);
+		}
+		else if (choice == 2)
+		{
+			M1.Output();
+		}
+		else
+			cout << "Invalid choice" << endl;
+	} while (1);
+}

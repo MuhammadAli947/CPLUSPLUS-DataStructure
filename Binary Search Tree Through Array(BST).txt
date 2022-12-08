@@ -1,0 +1,111 @@
+#include<iostream>
+using namespace std;
+class BST_Array
+{
+private:
+	int *BST;
+	bool *Flags;
+	int height;
+	int size;
+public:
+	BST_Array()
+	{
+		cout << "Enter height of tree" << endl;
+		cin >> height;
+		size = pow(2, height + 1) - 1;
+		BST = new int[size];
+		Flags = new bool[size];
+		for (int i = 0; i < size; i++)
+		{
+			Flags[i] = false;
+		}
+	}
+	void addElement(int val)
+	{
+		int i = 0;
+		while (i < size)
+		{
+			if (Flags[i] == false)
+			{
+				BST[i] = val;
+				Flags[i] = true;
+				break;
+			}
+			else if (val < BST[i])
+			{
+				i = 2 * i + 1;
+			}
+			else
+			{
+				i = 2 * i + 2;
+			}
+		}
+	}
+	void output()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << BST[i] << " : ";
+		}
+		cout << endl;
+		for (int i = 0; i < size; i++)
+		{
+			cout << Flags[i] << " : ";
+		}
+		cout << endl;
+	}
+	bool search(int val)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			while (Flags[i] == true)
+			{
+				if (val == BST[i])
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+	}
+};
+void main()
+{
+	BST_Array obj;
+	int choice;
+	while (1)
+	{
+		cout << "Press 1 For Input " << endl;
+		cout << "Press 2 For Output" << endl;
+		cout << "Press 3 For Search in Tree" << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			int value;
+			cout << "Enter Value " << endl;
+			cin >> value;
+			obj.addElement(value);
+		}
+		else if (choice == 2)
+		{
+			obj.output();
+		}
+		else if (choice == 3)
+		{
+			int serch;
+			cout << "Enter The Value you want to Search " << endl;
+			cin >> serch;
+			if (obj.search(serch) == true)
+			{
+				cout << "Value Found " << endl;
+			}
+			else
+			{
+				cout << "Value Not Found " << endl;
+			}
+		}
+	}
+}

@@ -1,0 +1,146 @@
+#include<iostream>
+#include<string>
+using namespace std;
+struct Pre
+{
+	string name;
+	int Pirority;
+};
+class Que
+{
+private:
+	int size;
+	Pre *que;
+
+public:
+	int rear;
+	int front;
+	bool is_Full()
+	{
+		if (rear == size)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool is_Empty()
+	{
+		if (rear == front)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	Que()
+	{
+		cout << "Enter Size " << endl;
+		cin >> size;
+		que = new Pre[size];
+		rear = 0;
+		front = 0;
+	}
+	void NQue(string n,int pri)
+	{
+		if (front == rear)
+		{
+			front = 0;
+			rear = 0;
+		}
+		if (is_Full() == 0)
+		{
+			que[rear].name = n;
+			que[rear].Pirority = pri;
+			if (rear>1)
+			{
+				for (int i = 0; i <= rear - 1; i++)
+				{
+					for (int j = 0; j <= rear - i - 1; j++)
+					{
+						if (que[j].Pirority > que[j + 1].Pirority)
+						{
+							Pre temp;
+							temp = que[j];
+							que[j] = que[j + 1];
+							que[j + 1] = temp;
+						}
+					}
+				}
+			}
+			rear++;
+		}
+		else
+		{
+			cout << "Que is Full " << endl;
+		}
+	}
+	void D_Que()
+	{
+		if (rear == front)
+		{
+			front = 0;
+			rear = 0;
+		}
+		if (is_Empty() == 0)
+		{
+			cout << que[front].name << endl;
+			cout << que[front].Pirority << endl;
+			front++;
+		}
+		else
+		{
+			cout << "Que is Empty " << endl;
+		}
+
+	}
+	void Print()
+	{
+		if (is_Empty() == 0)
+		{
+
+			for (int i = 0; i < rear; i++)
+			{
+				cout << que[i].name << endl;
+				cout << que[i].Pirority << endl;
+			}
+		}
+		else
+			cout <<"Queue is empty" << endl;
+	}
+};
+void main()
+{
+	Que obj;
+	int value;
+	int choice;
+	do
+	{
+		cout << "Press 1 for ENQUE " << endl;
+		cout << "Press 2 for DQUE " << endl;
+		cout << "Press 3 for Print " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			string name;
+			int pre;
+			cout << "Enter Name " << endl;
+			cin >> name;
+			cout << "Enter Preority " << endl;
+			cin >> pre;
+			obj.NQue(name,pre);
+		}
+		else if (choice == 2)
+		{
+			obj.D_Que();
+		}
+		else if (choice == 3)
+		{
+			obj.Print();
+		}
+	} while (1);
+}

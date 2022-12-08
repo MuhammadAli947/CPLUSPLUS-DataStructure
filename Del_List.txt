@@ -1,0 +1,118 @@
+#include<iostream>
+using namespace std;
+class Delete_List
+{
+private:
+	int *Arr;
+	int size;
+	int index;
+public:
+	Delete_List()
+	{
+		cout << "Enter The Size of List " << endl;
+		cin >> size;
+		Arr = new int[size];
+		index = 0;
+	}
+	bool Is_Full()
+	{
+		if (index == size)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool Is_Empty()
+	{
+		if (index == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void input(int value)
+	{
+		if (Is_Full() == false)
+		{
+			Arr[index] = value;
+			index++;
+		}
+		else
+		{
+			cout << "List is Full " << endl;
+		}
+	}
+	void output()
+	{
+		if (Is_Empty() == false)
+		{
+			for (int i = 0; i < index; i++)
+			{
+				cout << Arr[i]<<" : ";
+			}
+			cout << endl;
+		}
+		else
+		{
+			cout << "List is Empty " << endl;
+		}
+	}
+	void del_index(int index_nu)
+	{
+		if (index_nu < size)
+		{
+			if (Is_Empty() == false)
+			{
+				for (int i = index_nu + 1; i <= size; i++)
+				{
+					Arr[i - 1] = Arr[i];
+				}
+				index--;
+			}
+			else
+			{
+				cout << "List is Empty " << endl;
+			}
+		}
+		else
+		{
+			cout << "Invalid Index Number " << endl;
+		}
+	}
+};
+void main()
+{
+	int val;
+	int index_nu;
+	int choice;
+	Delete_List obj;
+	do
+	{
+		cout << "Press 1 For Input " << endl;
+		cout << "Press 2 For Output " << endl;
+		cout << "Press 3 For Delete " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << "Enter Number for List " << endl;
+			cin >> val;
+			obj.input(val);
+		}
+		else if (choice == 2)
+		{
+			obj.output();
+		}
+		else if (choice == 3)
+		{
+			cout << "Enter Index Number You Want to Delete " << endl;
+			cin >> index_nu;
+			obj.del_index(index_nu);
+		}
+	} while (1);
+}

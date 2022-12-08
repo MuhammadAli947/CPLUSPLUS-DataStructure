@@ -1,0 +1,222 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Person
+{
+public:
+	string name;
+	int age;
+};
+struct Node
+{
+	Person obj;
+	Node *next;
+};
+class LinkedList
+{
+private:
+	Node *Head;
+	Node *Tail;
+public:
+	LinkedList()
+	{
+		Head = NULL;
+		Tail = NULL;
+	}
+	void AddNode(Person & val)
+	{
+		Node *newNode = new Node();
+		newNode->obj = val;
+		newNode->next = NULL;
+		if (Head == NULL)
+		{
+			Head = newNode;
+			Tail = newNode;
+		}
+		else
+		{
+			Tail->next = newNode;
+			Tail = newNode;
+		}
+	}
+	void Output()
+	{
+		Node *tempNode;
+		tempNode = Head;
+		while (tempNode != NULL)
+		{
+			cout << tempNode->obj.name << endl;
+			cout << tempNode->obj.age << endl;
+			tempNode = tempNode->next;
+		}
+	}
+	void Add_Node_Front(Person val)
+	{
+		Node *newNode = new Node();
+		newNode->obj = val;
+		newNode->next = Head;
+		Head = newNode;
+	}
+	int Count()
+	{
+		int count = 0;
+		Node *tempNode;
+		tempNode = Head;
+		while (tempNode != NULL)
+		{
+			tempNode = tempNode->next;
+			count++;
+		}
+		cout << "Total Nodes Are " << count << endl;
+		return count;
+	}
+	void delete_front()
+	{
+		Node *temp;
+		temp = Head;
+		Head = Head->next;
+		delete temp;
+		cout << endl;
+		cout << "Sucessfully Delete " << endl;
+	}
+	void delete_last()
+	{
+		Node *previous;
+		Node *temp;
+		temp = Head;
+		if (Count() > 1)
+		{
+			while (temp->next != NULL)
+			{
+				previous = temp;
+				temp = temp->next;
+			}
+			Tail = previous;
+			Tail->next = NULL;
+			delete temp;
+			cout << endl;
+			cout << "Sucessfully Deleted " << endl;
+		}
+		else
+		{
+			temp = Head;
+			Head = Tail = NULL;
+			delete temp;
+			cout << endl;
+			cout << "Sucessfully Deleted " << endl;
+		}
+	}
+	void Inser_Specific(int Loc,Person & obj)
+	{
+		Node *newNode = new Node();
+		Node *Temp, *Previous, *Current;
+		Temp = Head;
+		for (int i = 1; i < Loc; i++)
+		{
+			Previous = Temp;
+			Current = Temp->next;
+			Temp = Temp->next;
+		}
+		Previous->next = newNode;
+		newNode->next = Current;
+		newNode->obj = obj;
+	}
+	void Delete_Specific(int Loc)
+	{
+		Node *Temp, *Previous, *Current;
+		Temp = Head;
+		for (int i = 1; i < Loc; i++)
+		{
+			Previous = Temp;
+			Current = Temp->next;
+			Temp = Temp->next;
+		}
+		Previous->next = Current->next;
+		delete Temp;
+		cout << endl;
+		cout << "Node has Been Sucessfully Deleted " << endl;
+	}
+};
+void main()
+{
+	int val;
+	int choice;
+	Person obj;
+	LinkedList L1;
+	do
+	{
+		cout << "-------------------------------------------" << endl;
+		cout << "-------------------------------------------" << endl;
+		cout << "Press 1 to Add node" << endl;
+		cout << "Press 2 to display Linked List" << endl;
+		cout << "Press 3 to Add node in front" << endl;
+		cout << "Press 4 to Count node" << endl;
+		cout << "Press 5 to Delete from Front " << endl;
+		cout << "Press 6 to Delete from End " << endl;
+		cout << "Press 7 to Add Node on specific Location" << endl;
+		cout << "Press 8 to Delete Node on specific Location" << endl; 
+		cout << "-------------------------------------------" << endl;
+		cout << "-------------------------------------------" << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			string name;
+			int age;
+			cout << "Enter Name" << endl;
+			cin >> obj.name;
+			cout << "Enter Age " << endl;
+			cin >> obj.age;
+			L1.AddNode(obj);
+		}
+		else if (choice == 2)
+		{
+			L1.Output();
+
+		}
+		else if (choice == 3)
+		{
+			cout << "Enter Name for new Node " << endl;
+			cin >> obj.name;
+			cout << "Enter Age for new Node " << endl;
+			cin >> obj.age;
+			L1.Add_Node_Front(obj);
+
+		}
+		else if (choice == 4)
+		{
+			L1.Count();
+
+		}
+		else if (choice == 5)
+		{
+			L1.delete_front();
+		}
+		else if (choice == 6)
+		{
+			L1.delete_last();
+		}
+		else if (choice == 7)
+		{
+			int Loc;
+			cout << "Enter The Location Of new Node " << endl;
+			cin >> Loc;
+			cout << "Enter Name " << endl;
+			cin >> obj.name;
+			cout << "Enter Age" << endl;
+			cin >> obj.age;
+			L1.Inser_Specific(Loc,obj);
+		}
+		else if (choice==8)
+		{
+			int Loc;
+			cout << "Enter The Location Of new Node " << endl;
+			cin >> Loc;
+			L1.Delete_Specific(Loc);
+		}
+		else
+		{
+			cout << "Invalid Input" << endl;
+		}
+	} while (1);
+}
+

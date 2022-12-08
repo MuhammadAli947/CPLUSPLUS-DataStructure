@@ -1,0 +1,133 @@
+#include<iostream>
+using namespace std;
+class Person
+{
+public:
+	int age;
+	Person()
+	{
+
+	}
+	~Person()
+	{
+
+	}
+};
+class Stack
+{
+private:
+	Person *arr;
+	int *stack;
+	int size;
+	int top;
+public:
+	Stack()
+	{
+		cout << "Enter size of stack" << endl;
+		cin >> size;
+		arr = new Person[size];
+		top = 0;
+	}
+	bool IsFull()
+	{
+		if (top == size)
+			return true;
+		else
+			return false;
+	}
+	bool IsEmpty()
+	{
+		if (top == 0)
+			return true;
+		else
+			return false;
+	}
+	void PUSH(Person val)
+	{
+		if (IsFull() == 0)
+		{
+			arr[top] = val;
+			top++;
+		}
+		else
+			cout << "Stack Overflow" << endl;
+	}
+	Person POP()
+	{
+		Person a;
+		if (IsEmpty() == 0)
+		{
+			a = arr[top - 1];
+			top--;
+			return a;
+
+		}
+		else
+			cout << "Stack Underflow" << endl;
+
+	}
+	void PrintStack()
+	{
+		if (IsEmpty() == 0)
+		{
+			for (int i = top - 1; i >= 0; i--)
+			{
+				cout << "__________" << endl;
+				cout << "|" << arr[i].age << "|" << endl;
+				cout << "__________" << endl;
+			}
+		}
+		else
+		{
+			cout << "Stack Underflow" << endl;
+		}
+
+	}
+
+};
+void main()
+{
+	Person value;
+	int choice;
+	Stack S1;
+	Stack S2;
+	Stack S3;
+	do{
+		cout << "Press 1 PUSH" << endl;
+		cout << "Press 2 POP" << endl;
+		cout << "Press 3 Print stack" << endl;
+		cout << "press 4 for Reverse " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << "Enter value" << endl;
+			cin >> value.age;
+			S1.PUSH(value);
+		}
+		else if (choice == 2)
+		{
+	
+			S1.POP();
+		}
+		else if (choice == 3)
+		{
+			S1.PrintStack();
+		}
+		else if (choice == 4)
+		{
+			S2.PUSH(S1.POP());
+			S2.PUSH(S1.POP());
+			S2.PUSH(S1.POP());
+			S3.PUSH(S2.POP());
+			S3.PUSH(S2.POP());
+			S3.PUSH(S2.POP());
+			S1.PUSH(S3.POP());
+			S1.PUSH(S3.POP());
+			S1.PUSH(S3.POP());
+			S1.PrintStack();
+		}
+		else
+			cout << "Invalid choice" << endl;
+
+	} while (1);
+}

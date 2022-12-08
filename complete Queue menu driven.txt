@@ -1,0 +1,112 @@
+#include<iostream>
+using namespace std;
+class Que
+{
+	private :
+		int front;
+		int rear;
+		int size;
+		int *arr;
+	public :
+		Que()
+		{
+			arr=new int[size];
+			front=0;
+			rear=0;
+			cout<<"please enter the size of Que"<<endl;
+			cin>>size	;
+		}
+		~Que()
+		{
+			
+		}
+		void Enque(int value)
+		{
+			if(Isfull()==0)
+			{
+			arr[front]=value;
+			front++;
+		    }
+		    else 
+		    {
+		    	cout<<"Que is full"<<endl;
+			}
+		}
+	    void Deque()
+	    {
+	    //	int a;
+	    	if(Isempty()==0)
+	    	{
+	    //	a=arr[rear];
+	    	cout<<arr[rear]<<endl;
+	    	rear++;
+	        }
+	        else
+	        {
+	           cout<<"Que is empty"<<endl;
+			}
+		}
+		void print()
+		{
+			for (int i=0;i<front;i++)
+			{
+				cout<<arr[i]<<endl;
+			}
+		}
+		bool Isfull()
+		{
+			if(front==size)
+			{
+				return true;
+			}
+			else
+			{
+		     	return false;
+		    }
+		}
+		bool Isempty()
+		{
+			if(front==0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+};
+int main()
+{
+	
+	int a;
+	int val;
+	Que q1;
+	int x;
+	do
+	{
+		cout<<"press 1 for Enque"<<endl;
+		cout<<"press 2 for Deque"<<endl;
+		cout<<"press 3 for print"<<endl;
+		cin>>a;
+	switch(a)
+	{
+		case 1 :
+			cout<<"please enter value"<<endl;
+			cin>>val;
+			q1.Enque(val);
+	    	break;
+		case 2 :
+			q1.Deque();
+			break;
+		case 3 :
+			q1.print();
+			break;
+		default :
+				cout<<"invalid entry"<<endl;
+				
+			
+	}
+	}
+	while(x=1);
+}

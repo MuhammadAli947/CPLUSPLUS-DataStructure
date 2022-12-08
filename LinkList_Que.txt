@@ -1,0 +1,101 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int val;
+	Node *next;
+	Node *previous;
+};
+class LLQue
+{
+private:
+	Node *Front;
+	Node *Rear;
+public:
+	LLQue()
+	{
+		Front = NULL;
+		Rear = NULL;
+	}
+	bool is_Empty()
+	{
+		if (Rear==NULL)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void EnQue(int value)
+	{
+		Node *newNode = new Node();
+		newNode->val = value;
+		newNode->previous = NULL;
+		if (Rear == NULL)
+		{
+			Front = newNode;
+			Rear = newNode;
+		}
+		else
+		{
+			Rear->next = newNode;
+			Rear = Rear->next;
+			
+		}
+	}
+	void DeQue()
+	{
+			Node *temp = Front;
+			cout << temp->val << endl;
+			Front = temp->next;  
+			delete temp; 
+	}
+	void Print()
+	{
+			Node *temp = Front;
+			while (temp != NULL)
+			{
+				cout << temp->val << endl;
+			}
+		
+	}
+};
+void main()
+{
+	int choice;
+	int value;
+	LLQue obj;
+	do
+	{
+		cout << "Press 1 EnQue " << endl;
+		cout << "Press 2 DeQue " << endl;
+		cout << "Press 3 To Print Que " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << endl;
+			cout << "Enter Value " << endl;
+			cin >> value;
+			obj.EnQue(value);
+			cout << endl;
+		}
+		else if (choice == 2)
+		{
+			cout << endl;
+			obj.DeQue();
+			cout << endl;
+		}
+		else if (choice == 3)
+		{
+			cout << endl;
+			obj.Print();
+			cout << endl;
+		}
+		else
+		{ 
+			cout << "Invalid Choice !" << endl;
+		}
+	} while (1);
+}

@@ -1,0 +1,128 @@
+#include<iostream>
+using namespace std;
+class person
+{
+	public :
+		int age;
+	person()
+	{
+		
+	}
+	~person()
+	{
+	}
+	void setage()
+	{
+		cout<<"please enter the age"<<endl;
+		cin>>age;
+	}
+	
+};
+class Que
+{
+	private :
+		int front;
+		int rear;
+		int size;
+		person *arr;
+	public :
+		Que()
+		{
+			arr=new person[size];
+			front=0;
+			rear=0;
+			cout<<"please enter the size of Que"<<endl;
+			cin>>size;
+		}
+		~Que()
+		{
+			
+		}
+		void Enque(person &value)
+		{
+			if(Isfull()==0)
+			{
+			arr[front]=value;
+			front++;
+		    }
+		    else 
+		    {
+		    	cout<<"Que is full"<<endl;
+			}
+		}
+	    void Deque()
+	    {
+	    	if(Isempty()==0)
+	    	{
+	    	cout<<arr[rear].age<<endl;
+	    	rear++;
+	        }
+	        else
+	        {
+	           cout<<"Que is empty"<<endl;
+			}
+		}
+		void print()
+		{
+			for (int i=0;i<front;i++)
+			{
+				cout<<arr[i].age<<endl;
+			}
+		}
+		bool Isfull()
+		{
+			if(front==size)
+			{
+				return true;
+			}
+			else
+			{
+		     	return false;
+		    }
+		}
+		bool Isempty()
+		{
+			if(front==0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+};
+int main()
+{
+	person p1;	
+	int a;
+	person value;
+	Que q1;
+	int x;
+	do
+	{
+		cout<<"press 1 for Enque"<<endl;
+		cout<<"press 2 for Deque"<<endl;
+		cout<<"press 3 for print"<<endl;
+		cin>>a;
+	switch(a)
+	{
+		case 1 :
+			cout<<"please enter value"<<endl;
+			cin>>value.age;
+			q1.Enque(value);
+	    	break;
+		case 2 :
+			q1.Deque();
+			break;
+		case 3 :
+			q1.print();
+			break;
+		default :
+				cout<<"invalid entry"<<endl;
+				
+			
+	}
+	}
+	while(x=1);
+}

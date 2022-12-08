@@ -1,0 +1,83 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	Node *Left;
+	Node *Right;
+	int Val;
+};
+class Tree
+{
+private:
+	Node *Root;
+public:
+	Tree()
+	{
+		Root = NULL;
+		Root->Left = NULL;
+		Root->Right = NULL;
+	}
+	void Add_Element(int val)
+	{
+		Node *newNode = new Node();
+		newNode->Left = NULL;
+		newNode->Right = NULL;
+		newNode->Val = val;
+		if (Root == NULL)
+		{
+			Root = newNode;
+		}
+		else
+		{
+			Node *Temp;
+			Temp = Root;
+			Node *Parent;
+			while (Temp != NULL)
+			{
+				Parent = Temp;
+				if (val > Temp->Val)
+				{
+					Temp = Temp->Right;
+				}
+				else
+				{
+					Temp = Temp->Left;
+				}
+				if (val > Parent->Val)
+				{
+					Parent->Right = newNode;
+				}
+				else
+				{
+					Parent->Left = newNode;
+				}
+			}
+		}
+	}
+	bool search_Tree(int val)
+	{
+		Node *Temp = Root;
+		while (Temp != NULL)
+		{
+			if (Temp->Val>val)
+			{
+				return true;
+			}
+			else if (val > Temp->Val)
+			{
+				Temp = Temp->Right;
+			}
+			else
+				Temp = Temp->Left;
+		}
+		return false;
+	}
+};
+void main()
+{
+	int val;
+	Tree obj;
+	cout << "Enter Value " << endl;
+	cin >> val;
+	obj.Add_Element(val);
+}

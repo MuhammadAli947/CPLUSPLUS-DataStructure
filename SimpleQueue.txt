@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+class Que
+{
+private:
+	int size;
+	int *que;
+	
+public:
+	int index;
+	int index2;
+	Que()
+	{
+		cout << "Enter Size " << endl;
+		cin >> size;
+		que = new int[size];
+		index = 0;
+		index2 = 0;
+	}
+	void NQue(int value)
+	{
+		que[index] = value;
+		index++;
+	}
+	void D_Que()
+	{
+			
+			cout << que[index2] << endl;
+			index2++;
+
+	}
+	void Print()
+	{
+		for (int i = 0; i < index; i++)
+		{
+			cout << que[i] << endl;
+		}
+	}
+};
+void main()
+{
+	Que obj;
+	int value;
+	int choice;
+	do
+	{
+		cout << "Press 1 for ENQUE " << endl;
+		cout << "Press 2 for DQUE " << endl;
+		cout << "Press 3 for Print " << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << "Enter Value " << endl;
+			cin >> value;
+			obj.NQue(value);
+		}
+		else if (choice == 2)
+		{
+			obj.D_Que();
+		}
+		else if (choice == 3)
+		{
+			obj.Print();
+		}
+	} while (1);
+}

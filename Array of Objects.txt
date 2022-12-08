@@ -1,0 +1,124 @@
+#include<iostream>
+using namespace std;
+#include<string>
+class person
+{
+public:
+	int age;
+	string name;
+	person()
+	{
+
+	}
+	~person()
+	{
+
+	}
+};
+
+class Delete_List
+{
+private:
+	person*Arr;
+	int size;
+	int index;
+public:
+	Delete_List()
+	{
+		cout << "Enter The Size of List " << endl;
+		cin >> size;
+		Arr = new person[size];
+		index = 0;
+	}
+	bool Is_Full()
+	{
+		if (index == size)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool Is_Empty()
+	{
+		if (index == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void input(person &obj)
+	{
+		if (Is_Full() == false)
+		{
+			Arr[index] = obj;
+			index++;
+		}
+		else
+		{
+			cout << "List is Full " << endl;
+		}
+	}
+	void output()
+	{
+		if (Is_Empty() == false)
+		{
+			for (int i = 0; i < index; i++)
+			{
+				cout << Arr[i].name << endl;
+				cout << Arr[i].age <<endl;
+				cout << endl;
+			}
+			cout << endl;
+		}
+		else
+		{
+			cout << "List is Empty " << endl;
+		}
+	}
+	void del_index(int index_nu)
+	{
+		if (index_nu < size)
+		{
+			if (Is_Empty() == false)
+			{
+				for (int i = index_nu; i < size; i++)
+				{
+					Arr[i] = Arr[i+1];
+				}
+				index--;
+			}
+			else
+			{
+				cout << "List is Empty " << endl;
+			}
+		}
+		else
+		{
+			cout << "Invalid Index Number " << endl;
+		}
+	}
+};
+void main()
+{
+	person P1;
+	person P2;
+	person P3;
+	P1.name = "Rehan";
+	P1.age = 18;
+	P2.name = "Ali";
+	P2.age = 22;
+	P3.name = "husnain";
+	P3.age = 30;
+
+	Delete_List L1;
+	L1.input(P1);
+	L1.input(P2);
+	L1.input(P3);
+	L1.output();
+}

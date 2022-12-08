@@ -1,0 +1,226 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int value;
+	Node *Next;
+	Node *Previous;
+};
+class Doubly_LL
+{
+private:
+	Node *Head;
+	Node *Tail;
+public:
+	Doubly_LL()
+	{
+		Head = NULL;
+		Tail = NULL;
+	}
+	bool is_empty()
+	{
+		if (Head == NULL)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	void AddNode_atEnd(int val)
+	{
+		Node *newNode = new Node();
+		newNode->value = val;
+		newNode->Next = NULL;
+		newNode->Previous = NULL;
+		if (Head == NULL)
+		{
+			Head = newNode;
+			Tail = newNode;
+		}
+		else
+		{
+			Tail->Next = newNode;
+			newNode->Previous = Tail;
+			Tail = newNode;
+		}
+	}
+	void AddNode_inFront(int val)
+	{
+		Node *newNode = new Node();
+		newNode->value = val;
+		newNode->Next = Head;
+		newNode->Previous = NULL;
+		Head->Previous = newNode;
+		Head = newNode;
+	}
+	void delete_inFront()
+	{
+		Node *Temp;
+		Temp = Head;
+		Head = Head->Next;
+		Head->Previous = NULL;
+		delete Temp;
+		cout << "Node Has Been Sucessfully Deleted " << endl;
+	}
+	void delete_atLast()
+	{
+		Node *Temp;
+		Temp = Tail;
+		Tail = Tail->Previous;
+		Tail->Next = NULL;
+		delete Temp;
+		cout << "Node Has Been Sucessfully Deleted " << endl;
+	}
+	void display_Que()
+	{
+		if (is_empty() == 0)
+		{
+			Node *Temp;
+			Temp = Head;
+			while (Temp != NULL)
+			{
+				cout << Temp->value << endl;
+				Temp = Temp->Next;
+			}
+		}
+		else
+		{
+			cout << "Que is Empty " << endl;
+		}
+	}
+	void AddNode_SpecificLoc(int Loc, int val)
+	{
+		Node *newNode = new Node();
+		Node *Temp;
+		Temp = Head;
+		for (int i = 1; i < Loc; i++)
+		{
+			Temp = Temp->Next;
+		}
+		newNode->Next = Temp;
+		newNode->value = val;
+		newNode->Previous = newNode->Next->Previous;
+		Temp->Previous = newNode;
+		newNode->Previous->Next = newNode;
+	}
+	void Delete_Specific(int Loc)
+	{
+		Node *Temp, *Current;
+		Temp = Head;
+		for (int i = 1; i < Loc; i++)
+		{
+			Temp = Temp->Next;
+		}
+		Temp->Previous->Next = Temp->Next;
+		Temp->Next->Previous = Temp->Previous;
+		delete Temp;
+		cout << "Node Has Been Sucessfully Deleted " << endl;
+	}
+	void Count_Nodes()
+	{
+		int count = 0;
+		if (is_empty() == 0)
+		{
+			Node *Temp;
+			Temp = Head;
+			while (Temp != NULL)
+			{
+				Temp = Temp->Next;
+				count++;
+			}
+			cout << "There are " << count << " Nodes " << endl;
+		}
+		else
+		{
+			cout << "Que is Empty " << endl;
+		}
+	}
+};
+void main()
+{
+	Doubly_LL obj;
+	int choice;
+	int Loc;
+	int val;
+	do
+	{
+		cout << "---------------------------------------------" << endl;
+		cout << "\t\tMenu" << endl;
+		cout << "---------------------------------------------" << endl;
+		cout << "Press 1 to Add Node at Last " << endl;
+		cout << "Press 2 to Output The Nodes " << endl;
+		cout << "Press 3 to Add Node in Front " << endl;
+		cout << "Press 4 to Delete Node in Front" << endl;
+		cout << "Press 5 to Delete Node at Last	" << endl;
+		cout << "Press 6 to Insert Node at Specific Location " << endl;
+		cout << "Press 7 to Delete Node at Specific Location " << endl;
+		cout << "Press 8 to Count The Nodes " << endl;
+		cout << "---------------------------------------------" << endl;
+		cout << "---------------------------------------------" << endl;
+		cin >> choice;
+		if (choice == 1)
+		{
+			cout << endl;
+			cout << "Enter value " << endl;
+			cin >> val;
+			obj.AddNode_atEnd(val);
+			cout << endl;
+		}
+		else if (choice == 2)
+		{
+			cout << endl;
+			obj.display_Que();
+			cout << endl;
+		}
+		else if (choice == 3)
+		{
+			cout << endl;
+			cout << "Enter value " << endl;
+			cin >> val;
+			obj.AddNode_inFront(val);
+			cout << endl;
+		}
+		else if (choice == 4)
+		{
+			cout << endl;
+			obj.delete_inFront();
+			cout << endl;
+		}
+		else if (choice == 5)
+		{
+			cout << endl;
+			obj.delete_atLast();
+			cout << endl;
+		}
+		else if (choice == 6)
+		{
+			cout << endl;
+			cout << "Enter Loc " << endl;
+			cin >> Loc;
+			cout << "Enter value " << endl;
+			cin >> val;
+			obj.AddNode_SpecificLoc(Loc, val);
+			cout << endl;
+		}
+		else if (choice == 7)
+		{
+			cout << endl;
+			cout << "Enter Loc " << endl;
+			cin >> Loc;
+			obj.Delete_Specific(Loc);
+			cout << endl;
+		}
+		else if (choice == 8)
+		{
+			cout << endl;
+			obj.Count_Nodes();
+			cout << endl;
+		}
+		else
+		{
+			cout << "Invalid Choice" << endl;
+		}
+	} while (1);
+}
